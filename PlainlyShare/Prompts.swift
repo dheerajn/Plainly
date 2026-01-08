@@ -28,6 +28,24 @@ struct Prompts {
         """
     }
     
+    static func linkExplanationPrompt(for url: String) -> String {
+        return """
+        Get the contents of the URL and explain this page
+        
+        URL: \(url)
+        
+        Output Format (Markdown):
+        # TL;DR
+        (Summary)
+                
+        # Plain English
+        (Detailed explanation of the page content)
+                
+        # What This Means for You
+        (Implications or actions for the reader)
+        """
+    }
+    
     static var videoExplanationPrompt: String {
         """
         Analyze the following video link and provide a clear explanation.

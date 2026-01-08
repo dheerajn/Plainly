@@ -88,7 +88,7 @@ class ExplanationViewModel: ObservableObject {
                 if isYouTubeURL(url.absoluteString) {
                     markdown = try await geminiService.explainVideo(url: url)
                 } else {
-                    markdown = try await geminiService.explainText(text: url.absoluteString)
+                    markdown = try await geminiService.explainLink(url: url)
                 }
             case .videoData(let data):
                 markdown = try await geminiService.explainVideoData(data: data)

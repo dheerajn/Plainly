@@ -15,6 +15,10 @@ actor GeminiService {
         return try await generateResponse(prompt: Prompts.explanationPrompt(for: text))
     }
     
+    func explainLink(url: URL) async throws -> String {
+        return try await generateResponse(prompt: Prompts.linkExplanationPrompt(for: url.absoluteString))
+    }
+    
     func explainVideo(url: URL) async throws -> String {
         return try await analyzeYouTubeVideo(videoURL: url.absoluteString)
     }
