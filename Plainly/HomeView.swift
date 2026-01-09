@@ -29,7 +29,7 @@ struct HomeView: View {
                             .font(.system(size: 40, weight: .bold, design: .rounded))
                             .tracking(1)
 
-                        Text("Simplicity, delivered.")
+                        Text("Instant clarity from any app, private by design.")
                             .font(.title3)
                             .foregroundColor(.secondary)
                     }

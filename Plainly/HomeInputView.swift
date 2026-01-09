@@ -17,13 +17,13 @@ struct HomeInputView: View {
                         .frame(width: AppLayout.iconButtonSize, height: AppLayout.iconButtonSize)
                         .background(Circle().fill(Color.primary.opacity(0.05)))
                 }
-                .onChange(of: viewModel.selectedItem) { newItem in
+                .onChange(of: viewModel.selectedItem) { _, newItem in
                     viewModel.handleMediaSelection(newItem)
                 }
                 
                 // TextField Bar
                 HStack {
-                    TextField("What's on your mind?", text: $viewModel.inputText, axis: .vertical)
+                    TextField("Ask me to explain anything...", text: $viewModel.inputText, axis: .vertical)
                         .lineLimit(1...5)
                         .font(.body)
                         .padding(.horizontal, AppLayout.inputFieldHorizontalPadding)

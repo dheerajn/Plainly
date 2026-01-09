@@ -9,15 +9,15 @@ struct OnboardingView: View {
             // Slide 1: Welcome
             OnboardingSlide(
                 image: "sparkles",
-                title: "Welcome to Plainly",
-                description: "Your personal AI companion that makes complex things simple. Just ask, and we explain."
+                title: "Clarity, Instant & Integrated",
+                description: "Plainly lives where you are. Get instant summaries from any app using the share sheet—no more copying and switching apps."
             )
             
             // Slide 2: Modes
             OnboardingSlide(
                 image: "lock.shield",
-                title: "Private by Design",
-                description: "Choose 'On-Device' for total privacy, or 'Cloud' for advanced AI power. You are in control."
+                title: "Unmatched Privacy",
+                description: "We believe your data is yours. Choose 'On-Device' for 100% private processing that never leaves your phone."
             )
             
             // Slide 3: Get Started
