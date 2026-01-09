@@ -32,7 +32,7 @@ struct ContentView: View {
                     VStack(spacing: 8) {
                         Image(systemName: "sparkles")
                             .font(.system(size: 40))
-                            .foregroundStyle(LinearGradient(colors: [.indigo, .purple], startPoint: .topLeading, endPoint: .bottomTrailing))
+                            .foregroundStyle(.primary)
                             .padding(.bottom, 8)
                         
                         Text("Plainly")
@@ -65,8 +65,8 @@ struct ContentView: View {
                                     .font(.subheadline.weight(.semibold))
                                     .padding(.horizontal, 16)
                                     .padding(.vertical, 10)
-                                    .background(Color.blue.opacity(0.1))
-                                    .foregroundColor(.blue)
+                                    .background(Color.primary.opacity(0.1))
+                                    .foregroundColor(.primary)
                                     .cornerRadius(20)
                             }
                             
@@ -87,10 +87,10 @@ struct ContentView: View {
                                 .padding(.horizontal, 24)
                                 .padding(.vertical, 12)
                                 .background(
-                                    inputText.isEmpty ? Color.gray : Color.indigo
+                                    inputText.isEmpty ? Color.gray : Color.primary
                                 )
                                 .cornerRadius(30)
-                                .shadow(color: .indigo.opacity(0.3), radius: 10, x: 0, y: 5)
+                                .shadow(color: .primary.opacity(0.2), radius: 10, x: 0, y: 5)
                             }
                             .disabled(inputText.isEmpty)
                             .matchedGeometryEffect(id: "explainButton", in: animation)
