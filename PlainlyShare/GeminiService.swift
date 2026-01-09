@@ -30,17 +30,9 @@ actor GeminiService {
         let videoPart = InlineDataPart(data: data, mimeType: "video/mp4")
         
         do {
-            print("--- Gemini Request (Video Data) ---")
-            print("Prompt: \(prompt)")
             let response = try await model.generateContent(prompt, videoPart)
-            print("--- Gemini Response (Video Data) ---")
-            print(response.text ?? "No text")
-            print("-----------------------------------")
             return response.text ?? "No clear explanation could be generated."
         } catch {
-            print("--- Gemini Error (Video Data) ---")
-            print(error)
-            print("-----------------------------------")
             throw error
         }
     }
@@ -50,17 +42,9 @@ actor GeminiService {
         let model = ai.generativeModel(modelName: modelName)
         
         do {
-            print("--- Gemini Request ---")
-            print("Prompt: \(prompt)")
             let response = try await model.generateContent(prompt)
-            print("--- Gemini Response ---")
-            print(response.text ?? "No text")
-            print("-----------------------")
             return response.text ?? "No clear explanation could be generated."
         } catch {
-            print("--- Gemini Error ---")
-            print(error)
-            print("-----------------------")
             throw error
         }
     }
@@ -72,16 +56,9 @@ actor GeminiService {
         let prompt = TextPart(Prompts.videoExplanationPrompt)
         
         do {
-            print("--- Gemini Request (YouTube Video) ---")
-            print("Video URL: \(videoURL)")
-            print("Prompt: \(Prompts.videoExplanationPrompt)")
             let response = try await model.generateContent([videoPart, prompt])
-            print("--- Gemini Response (YouTube Video) ---")
-            print(response.text ?? "No text")
-            print("--------------------------------------")
             return response.text ?? "No summary generated."
         } catch {
-            print("--- Gemini Error (YouTube Video), falling back to simple prompt ---")
             return try await generateResponse(prompt: videoURL)
         }
     }
@@ -93,17 +70,9 @@ actor GeminiService {
         let prompt = Prompts.imageExplanationPrompt
         
         do {
-            print("--- Gemini Request (Image) ---")
-            print("Prompt: \(prompt)")
             let response = try await model.generateContent(prompt, imagePart)
-            print("--- Gemini Response (Image) ---")
-            print(response.text ?? "No text")
-            print("------------------------------")
             return response.text ?? "No clear explanation could be generated."
         } catch {
-            print("--- Gemini Error (Image) ---")
-            print(error)
-            print("------------------------------")
             throw error
         }
     }
@@ -117,18 +86,9 @@ actor GeminiService {
         let prompt = Prompts.documentExplanationPrompt(fileName: fileName)
         
         do {
-            print("--- Gemini Request (Document) ---")
-            print("FileName: \(fileName), MimeType: \(mimeType)")
-            print("Prompt: \(prompt)")
             let response = try await model.generateContent(prompt, docPart)
-            print("--- Gemini Response (Document) ---")
-            print(response.text ?? "No text")
-            print("---------------------------------")
             return response.text ?? "No clear explanation could be generated."
         } catch {
-            print("--- Gemini Error (Document) ---")
-            print(error)
-            print("---------------------------------")
             // Fallback for non-PDF or large files: explain based on metadata if needed
             throw error
         }

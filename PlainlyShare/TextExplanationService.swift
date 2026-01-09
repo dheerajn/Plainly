@@ -34,11 +34,9 @@ actor TextExplanationService {
              do {
                  return try await generateLiveExplanation(for: text)
              } catch {
-                 print("Live generation failed: \(error). Falling back to mock.")
                  return await mockExplanation(for: text)
              }
         } else {
-             print("SystemLanguageModel unavailable: \(systemModel.availability). Falling back to mock.")
              return await mockExplanation(for: text)
         }
         #else
@@ -56,15 +54,8 @@ actor TextExplanationService {
         // Flexible prompt focusing on clarity and Markdown (Shared)
         let promptString = Prompts.explanationPrompt(for: text)
         
-        print("--- On-Device Request ---")
-        print("Prompt: \(promptString)")
-        
         let prompt = Prompt(promptString)
         let response = try await session.respond(to: prompt)
-        
-        print("--- On-Device Response ---")
-        print(response.content)
-        print("-------------------------")
         
         return ExplanationResult(markdown: response.content)
     }
@@ -73,12 +64,8 @@ actor TextExplanationService {
     // MARK: - Mock Data
     
     private func mockExplanation(for text: String) async -> ExplanationResult {
-        print("--- Mocking Explanation (On-Device unavailable) ---")
         try? await Task.sleep(nanoseconds: 1 * 1_000_000_000)
         let response = mockResponse(for: text)
-        print("--- Mock Response ---")
-        print(response)
-        print("---------------------")
         return ExplanationResult(markdown: response)
     }
     

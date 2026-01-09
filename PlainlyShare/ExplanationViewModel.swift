@@ -276,7 +276,6 @@ class ExplanationViewModel: ObservableObject {
             generator.notificationOccurred(.success)
             
         } catch {
-            print("Error parsing markdown for clipboard: \(error)")
             UIPasteboard.general.string = markdown
             
             let generator = UINotificationFeedbackGenerator()
