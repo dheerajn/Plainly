@@ -25,13 +25,13 @@ struct HistoryView: View {
                                         Image(uiImage: uiImage)
                                             .resizable()
                                             .aspectRatio(contentMode: .fill)
-                                            .frame(width: 32, height: 32)
+                                            .frame(width: AppLayout.smallIconSize, height: AppLayout.smallIconSize)
                                             .clipShape(Circle())
                                     } else {
                                         Image(systemName: icon(for: item.type))
                                             .font(.system(size: 14, weight: .semibold))
                                             .foregroundStyle(.background)
-                                            .frame(width: 32, height: 32)
+                                            .frame(width: AppLayout.smallIconSize, height: AppLayout.smallIconSize)
                                             .background(color(for: item.type))
                                             .clipShape(Circle())
                                     }
@@ -47,7 +47,7 @@ struct HistoryView: View {
                                                 .padding(.horizontal, 6)
                                                 .padding(.vertical, 2)
                                                 .background(Color.secondary.opacity(0.1))
-                                                .cornerRadius(4)
+                                                .cornerRadius(AppLayout.extraSmallCornerRadius)
                                                 .foregroundColor(.primary)
                                             
                                             Text(item.date.formatted(date: .abbreviated, time: .shortened))

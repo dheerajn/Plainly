@@ -36,7 +36,7 @@ struct OnboardingView: View {
                         .font(.headline)
                         .foregroundStyle(.background)
                         .padding(.horizontal, 40)
-                        .padding(.vertical, 16)
+                        .padding(.vertical, AppLayout.inputFieldHorizontalPadding)
                         .background(Color.primary)
                         .cornerRadius(30)
                         .shadow(radius: 5)
@@ -56,7 +56,7 @@ struct OnboardingSlide: View {
     let description: String
     
     var body: some View {
-        VStack(spacing: 20) {
+        VStack(spacing: AppLayout.bottomPadding) {
             Image(systemName: image)
                 .font(.system(size: 80))
                 .foregroundStyle(.primary)

@@ -8,13 +8,13 @@ struct HomeInputView: View {
         VStack(spacing: 0) {
             Spacer()
             
-            HStack(spacing: 12) {
+            HStack(spacing: AppLayout.standardSpacing) {
                 // Media Picker
                 PhotosPicker(selection: $viewModel.selectedItem, matching: .any(of: [.videos, .images])) {
                     Image(systemName: "photo.on.rectangle")
                         .font(.system(size: 18, weight: .semibold))
                         .foregroundColor(.primary)
-                        .frame(width: 44, height: 44)
+                        .frame(width: AppLayout.iconButtonSize, height: AppLayout.iconButtonSize)
                         .background(Circle().fill(Color.primary.opacity(0.05)))
                 }
                 .onChange(of: viewModel.selectedItem) { newItem in
@@ -26,8 +26,8 @@ struct HomeInputView: View {
                     TextField("What's on your mind?", text: $viewModel.inputText, axis: .vertical)
                         .lineLimit(1...5)
                         .font(.body)
-                        .padding(.horizontal, 16)
-                        .padding(.vertical, 10)
+                        .padding(.horizontal, AppLayout.inputFieldHorizontalPadding)
+                        .padding(.vertical, AppLayout.inputFieldVerticalPadding)
                     
                     if !viewModel.inputText.isEmpty {
                         Button(action: {
@@ -46,13 +46,13 @@ struct HomeInputView: View {
                 .background(Capsule().fill(Color.primary.opacity(0.05)))
                 .background(Capsule().stroke(Color.primary.opacity(0.1), lineWidth: 0.5))
             }
-            .padding(.horizontal, 16)
-            .padding(.vertical, 10)
+            .padding(.horizontal, AppLayout.inputFieldHorizontalPadding)
+            .padding(.vertical, AppLayout.inputFieldVerticalPadding)
             .background(.ultraThinMaterial)
             .clipShape(Capsule(style: .continuous))
             .shadow(color: .black.opacity(0.1), radius: 20, x: 0, y: 10)
             .padding(.horizontal)
-            .padding(.bottom, 20)
+            .padding(.bottom, AppLayout.bottomPadding)
         }
     }
 }

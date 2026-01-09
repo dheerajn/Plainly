@@ -14,14 +14,14 @@ struct SuggestionPill: View {
     let text: String
     
     var body: some View {
-        HStack(spacing: 6) {
+        HStack(spacing: AppLayout.extraSmallSpacing) {
             Image(systemName: icon)
             Text(text)
         }
         .font(.caption.weight(.medium))
-        .padding(.horizontal, 12)
-        .padding(.vertical, 8)
-        .background(Color.white.opacity(0.3))
+        .padding(.horizontal, AppLayout.standardSpacing)
+        .padding(.vertical, AppLayout.smallSpacing)
+        .background(AppColors.glassSurface)
         .clipShape(Capsule())
     }
 }

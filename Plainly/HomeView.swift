@@ -19,11 +19,11 @@ struct HomeView: View {
                     Spacer()
                     
                     // Title Group
-                    VStack(spacing: 8) {
+                    VStack(spacing: AppLayout.smallSpacing) {
                         Image(systemName: "sparkles")
                             .font(.system(size: 60))
                             .foregroundStyle(.primary)
-                            .padding(.bottom, 8)
+                            .padding(.bottom, AppLayout.smallSpacing)
                         
                         Text("Plainly")
                             .font(.system(size: 40, weight: .bold, design: .rounded))
@@ -38,7 +38,7 @@ struct HomeView: View {
                     
                     // Suggestions
                     ScrollView(.horizontal, showsIndicators: false) {
-                        HStack(spacing: 12) {
+                        HStack(spacing: AppLayout.standardSpacing) {
                             SuggestionPill(icon: "doc.text", text: "Contracts")
                             SuggestionPill(icon: "link", text: "YouTube")
                             SuggestionPill(icon: "photo", text: "Screenshots")
@@ -54,7 +54,7 @@ struct HomeView: View {
                     Spacer()
                     
                     // Invisible spacer to push content up when input bar is present
-                    Color.clear.frame(height: 100)
+                    Color.clear.frame(height: AppLayout.inputBarHeight)
                 }
                 .padding()
                 

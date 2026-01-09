@@ -5,7 +5,17 @@ struct AppLayout {
     static let padding: CGFloat = 24
     static let cornerRadius: CGFloat = 24
     static let smallCornerRadius: CGFloat = 12
+    static let extraSmallCornerRadius: CGFloat = 4
     static let iconSize: CGFloat = 44
+    static let iconButtonSize: CGFloat = 44
+    static let smallIconSize: CGFloat = 32
+    static let standardSpacing: CGFloat = 12
+    static let smallSpacing: CGFloat = 8
+    static let extraSmallSpacing: CGFloat = 4
+    static let inputBarHeight: CGFloat = 100
+    static let inputFieldHorizontalPadding: CGFloat = 16
+    static let inputFieldVerticalPadding: CGFloat = 10
+    static let bottomPadding: CGFloat = 20
 }
 
 // MARK: - Colors
