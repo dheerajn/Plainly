@@ -364,19 +364,19 @@ struct ImageReferenceSection: View {
                             Text("Image Attached")
                                 .font(.caption)
                         }
-                        .foregroundColor(.secondary)
+                        .foregroundColor(.primary)
                         .transition(.opacity)
                     } else {
                         Text("Hide image")
                             .font(.caption)
-                            .foregroundColor(.secondary.opacity(0.8))
+                            .foregroundColor(.primary.opacity(0.8))
                     }
                     
                     Spacer()
                     
                     Image(systemName: "chevron.right")
                         .font(.system(size: 16, weight: .bold))
-                        .foregroundColor(.secondary)
+                        .foregroundColor(.primary)
                         .rotationEffect(.degrees(isExpanded ? 90 : 0))
                 }
                 .padding(.vertical, 8)
