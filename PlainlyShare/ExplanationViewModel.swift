@@ -11,6 +11,7 @@ class ExplanationViewModel: ObservableObject {
     @Published var loadingText: String = "Loading..."
     @Published var displayInput: String?
     @Published var displayImageData: Data?
+    @Published var isFromHistory: Bool = false
     
     private let textService = TextExplanationService()
     private let geminiService = GeminiService()
@@ -25,9 +26,11 @@ class ExplanationViewModel: ObservableObject {
             self.isLoading = false
             self.selectedMode = item.isCloud ? .gemini : .onDevice
             self.loadingText = "Restored from History"
+            self.isFromHistory = true
         } else if let input = input {
             configureMode(for: input)
             updateDisplayInput(for: input)
+            self.isFromHistory = false
         }
     }
     

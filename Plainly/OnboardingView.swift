@@ -25,7 +25,7 @@ struct OnboardingView: View {
                 OnboardingSlide(
                     image: "hand.tap",
                     title: "Ready?",
-                    description: "Share text, links, or videos from any app to Plainly to get instant summaries."
+                    description: "Share text, links, videos, images, documents, or code from any app to Plainly to get instant summaries."
                 )
                 
                 Button(action: {

@@ -37,12 +37,19 @@ struct HomeView: View {
                     Spacer()
                     
                     // Suggestions
-                    HStack(spacing: 12) {
-                        SuggestionPill(icon: "doc.text", text: "Contracts")
-                        SuggestionPill(icon: "link", text: "YouTube")
-                        SuggestionPill(icon: "photo", text: "Screenshots")
+                    ScrollView(.horizontal, showsIndicators: false) {
+                        HStack(spacing: 12) {
+                            SuggestionPill(icon: "doc.text", text: "Contracts")
+                            SuggestionPill(icon: "link", text: "YouTube")
+                            SuggestionPill(icon: "photo", text: "Screenshots")
+                            SuggestionPill(icon: "doc.fill", text: "PDFs")
+                            SuggestionPill(icon: "chevron.left.forwardslash.chevron.right", text: "Code")
+                            SuggestionPill(icon: "video", text: "Videos")
+                            SuggestionPill(icon: "newspaper", text: "Articles")
+                        }
+                        .padding(.horizontal)
                     }
-                    .opacity(0.7)
+                    .opacity(0.8)
                     
                     Spacer()
                     
