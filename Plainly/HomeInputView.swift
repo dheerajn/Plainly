@@ -9,14 +9,17 @@ struct HomeInputView: View {
             Spacer()
             
             HStack(spacing: AppLayout.standardSpacing) {
-                // Media Picker
-                PhotosPicker(selection: $viewModel.selectedItem, matching: .any(of: [.videos, .images])) {
+                // Media Button
+                Button(action: {
+                    viewModel.requestPhotoPermission()
+                }) {
                     Image(systemName: "photo.on.rectangle")
                         .font(.system(size: 18, weight: .semibold))
                         .foregroundColor(.primary)
                         .frame(width: AppLayout.iconButtonSize, height: AppLayout.iconButtonSize)
                         .background(Circle().fill(Color.primary.opacity(0.05)))
                 }
+                .photosPicker(isPresented: $viewModel.isPickerPresented, selection: $viewModel.selectedItem, matching: .any(of: [.videos, .images]))
                 .onChange(of: viewModel.selectedItem) { _, newItem in
                     viewModel.handleMediaSelection(newItem)
                 }

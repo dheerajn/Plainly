@@ -7,35 +7,40 @@ class HomeViewModel: ObservableObject {
     @Published var isUnfolded = false
     @Published var inputForExplanation: ShareInput?
     @Published var selectedItem: PhotosPickerItem?
+    @Published var isPickerPresented: Bool = false
     
     // Permission Alert State
     @Published var showPermissionAlert = false
     @Published var permissionAlertTitle = ""
     @Published var permissionAlertMessage = ""
     
-    // Auto-process media selection
-    func handleMediaSelection(_ newItem: PhotosPickerItem?) {
-        guard let item = newItem else { return }
-        
-        // 1. Check Permissions
+    func requestPhotoPermission() {
         let status = PHPhotoLibrary.authorizationStatus(for: .readWrite)
         
         switch status {
         case .notDetermined:
             PHPhotoLibrary.requestAuthorization(for: .readWrite) { newStatus in
-                if newStatus == .authorized || newStatus == .limited {
-                    self.processMediaItem(item)
-                } else {
-                    self.showPermissionError()
+                DispatchQueue.main.async {
+                    if newStatus == .authorized || newStatus == .limited {
+                        self.isPickerPresented = true
+                    } else {
+                        self.showPermissionError()
+                    }
                 }
             }
         case .authorized, .limited:
-            processMediaItem(item)
+            isPickerPresented = true
         case .denied, .restricted:
             showPermissionError()
         @unknown default:
             break
         }
+    }
+    
+    // Auto-process media selection
+    func handleMediaSelection(_ newItem: PhotosPickerItem?) {
+        guard let item = newItem else { return }
+        processMediaItem(item)
     }
     
     private func processMediaItem(_ item: PhotosPickerItem) {
