@@ -45,12 +45,17 @@ struct HistoryItem: Codable, Identifiable, Equatable {
 class HistoryManager {
     static let shared = HistoryManager()
     private let fileName = "explanation_history.json"
+    private let appGroupIdentifier = "group.com.dheeru.Plainly"
     
     private init() {}
     
     private var historyFileURL: URL? {
-        // Use the Documents Directory for persistent storage
-        FileManager.default.urls(for: .documentDirectory, in: .userDomainMask).first?.appendingPathComponent(fileName)
+        // Use App Group container for sharing between main app and share extension
+        if let containerURL = FileManager.default.containerURL(forSecurityApplicationGroupIdentifier: appGroupIdentifier) {
+            return containerURL.appendingPathComponent(fileName)
+        }
+        // Fallback to Documents Directory if App Group is not configured
+        return FileManager.default.urls(for: .documentDirectory, in: .userDomainMask).first?.appendingPathComponent(fileName)
     }
     
     func save(_ item: HistoryItem) {
