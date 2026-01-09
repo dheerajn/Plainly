@@ -5,61 +5,54 @@ struct HomeInputView: View {
     @ObservedObject var viewModel: HomeViewModel
     
     var body: some View {
-        VStack(alignment: .leading, spacing: 16) {
-            Text("What's on your mind?")
-                .font(.headline)
-                .foregroundColor(.secondary)
+        VStack(spacing: 0) {
+            Spacer()
             
-            TextField("Paste text or URL...", text: $viewModel.inputText, axis: .vertical)
-                .lineLimit(3...8) // Min 3 lines, Max 8 lines before scrolling
-                .padding()
-                .background(Color.white.opacity(0.6))
-                .cornerRadius(16)
-                .font(.body)
-                .textInputAutocapitalization(.sentences)
-                .frame(maxHeight: 200) // Explicit constraint to prevent layout breaking
-                .shadow(color: .black.opacity(0.05), radius: 5, x: 0, y: 2)
-            
-            HStack {
+            HStack(spacing: 12) {
                 // Media Picker
                 PhotosPicker(selection: $viewModel.selectedItem, matching: .any(of: [.videos, .images])) {
-                    Label("Media", systemImage: "photo.on.rectangle")
-                        .font(.subheadline.weight(.semibold))
-                        .padding(.horizontal, 16)
-                        .padding(.vertical, 10)
-                        .background(Color.blue.opacity(0.1))
-                        .foregroundColor(.blue)
-                        .cornerRadius(20)
+                    Image(systemName: "photo.on.rectangle")
+                        .font(.system(size: 18, weight: .semibold))
+                        .foregroundColor(.primary)
+                        .frame(width: 44, height: 44)
+                        .background(Circle().fill(Color.primary.opacity(0.05)))
                 }
                 .onChange(of: viewModel.selectedItem) { newItem in
                     viewModel.handleMediaSelection(newItem)
                 }
                 
-                Spacer()
-                
-                // Explain Button
-                Button(action: {
-                    hideKeyboard()
-                    viewModel.startExplanation()
-                }) {
-                    HStack {
-                        Text("Explain")
-                        Image(systemName: "arrow.right")
+                // TextField Bar
+                HStack {
+                    TextField("What's on your mind?", text: $viewModel.inputText, axis: .vertical)
+                        .lineLimit(1...5)
+                        .font(.body)
+                        .padding(.horizontal, 16)
+                        .padding(.vertical, 10)
+                    
+                    if !viewModel.inputText.isEmpty {
+                        Button(action: {
+                            hideKeyboard()
+                            viewModel.startExplanation()
+                        }) {
+                            Image(systemName: "arrow.up.circle.fill")
+                                .font(.system(size: 32))
+                                .symbolRenderingMode(.hierarchical)
+                                .foregroundStyle(Color.primary)
+                        }
+                        .padding(.trailing, 6)
+                        .transition(.scale.combined(with: .opacity))
                     }
-                    .font(.headline)
-                    .foregroundColor(.white)
-                    .padding(.horizontal, 24)
-                    .padding(.vertical, 12)
-                    .background(
-                        viewModel.inputText.isEmpty ? Color.gray : Color.indigo
-                    )
-                    .cornerRadius(30)
-                    .shadow(color: .indigo.opacity(0.3), radius: 10, x: 0, y: 5)
                 }
-                .disabled(viewModel.inputText.isEmpty)
+                .background(Capsule().fill(Color.primary.opacity(0.05)))
+                .background(Capsule().stroke(Color.primary.opacity(0.1), lineWidth: 0.5))
             }
+            .padding(.horizontal, 16)
+            .padding(.vertical, 10)
+            .background(.ultraThinMaterial)
+            .clipShape(Capsule(style: .continuous))
+            .shadow(color: .black.opacity(0.1), radius: 20, x: 0, y: 10)
+            .padding(.horizontal)
+            .padding(.bottom, 20)
         }
-        .padding(AppLayout.padding)
-        .glassCard()
     }
 }

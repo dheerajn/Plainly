@@ -10,12 +10,12 @@ struct AppLayout {
 
 // MARK: - Colors
 struct AppColors {
-    // Ethereal Gradients
+    // Ethereal Neutral Gradients
     static let backgroundGradient = LinearGradient(
         colors: [
-            Color(hex: "F4F1EA"), // Soft cream/white
-            Color(hex: "E6EBF5"), // Soft blueish highlight
-            Color(hex: "F0E6EF")  // Soft pinkish highlight
+            Color(hex: "FFFFFF"), // Pure white
+            Color(hex: "F8F9FA"), // Very light grey
+            Color(hex: "F1F3F5")  // Light grey
         ],
         startPoint: .topLeading,
         endPoint: .bottomTrailing
@@ -23,22 +23,22 @@ struct AppColors {
     
     static let darkBackgroundGradient = LinearGradient(
         colors: [
-            Color(hex: "0F172A"), // Deep indigo/slate
-            Color(hex: "1E293B"), // Lighter slate
-            Color(hex: "334155")  // Slate highlight
+            Color(hex: "000000"), // Pure black
+            Color(hex: "121212"), // Very dark grey
+            Color(hex: "1A1A1A")  // Dark grey
         ],
         startPoint: .topLeading,
         endPoint: .bottomTrailing
     )
     
-    // Semantic
-    static let accent = Color.indigo
+    // Semantic - Grayscale
+    static let accent = Color.primary
     static let textPrimary = Color.primary
     static let textSecondary = Color.secondary
     
-    // Glass
-    static let glassBorder = Color.white.opacity(0.4)
-    static let glassSurface = Color.white.opacity(0.3)
+    // Glass - Neutral
+    static let glassBorder = Color.primary.opacity(0.1)
+    static let glassSurface = Color.primary.opacity(0.05)
 }
 
 // MARK: - Extensions
@@ -97,27 +97,15 @@ struct GlassModifier: ViewModifier {
 
 // MARK: - Background View
 struct AppBackground: View {
+    @Environment(\.colorScheme) var colorScheme
+    
     var body: some View {
         ZStack {
             // Adaptive background based on system theme
-            GeometryReader { _ in
-                Color.clear
-                    .background(.background) // System background base
-                    .overlay(
-                        ZStack {
-                            Circle()
-                                .fill(Color.blue.opacity(0.15))
-                                .frame(width: 300, height: 300)
-                                .blur(radius: 80)
-                                .offset(x: -100, y: -200)
-                            
-                            Circle()
-                                .fill(Color.purple.opacity(0.15))
-                                .frame(width: 300, height: 300)
-                                .blur(radius: 80)
-                                .offset(x: 100, y: 200)
-                        }
-                    )
+            if colorScheme == .dark {
+                AppColors.darkBackgroundGradient
+            } else {
+                AppColors.backgroundGradient
             }
         }
         .ignoresSafeArea()

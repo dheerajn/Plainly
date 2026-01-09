@@ -34,10 +34,10 @@ struct OnboardingView: View {
                 }) {
                     Text("Get Started")
                         .font(.headline)
-                        .foregroundColor(.white)
+                        .foregroundStyle(.background)
                         .padding(.horizontal, 40)
                         .padding(.vertical, 16)
-                        .background(Color.indigo)
+                        .background(Color.primary)
                         .cornerRadius(30)
                         .shadow(radius: 5)
                 }
@@ -59,9 +59,9 @@ struct OnboardingSlide: View {
         VStack(spacing: 20) {
             Image(systemName: image)
                 .font(.system(size: 80))
-                .foregroundStyle(LinearGradient(colors: [.blue, .purple], startPoint: .topLeading, endPoint: .bottomTrailing))
+                .foregroundStyle(.primary)
                 .padding()
-                .background(Color.white.opacity(0.5))
+                .background(Color.primary.opacity(0.05))
                 .clipShape(Circle())
             
             Text(title)

@@ -16,26 +16,25 @@ struct HomeView: View {
                 
                 // 2. Main Content
                 VStack(spacing: AppLayout.padding) {
+                    Spacer()
                     
                     // Title Group
                     VStack(spacing: 8) {
                         Image(systemName: "sparkles")
-                            .font(.system(size: 40))
-                            .foregroundStyle(LinearGradient(colors: [.indigo, .purple], startPoint: .topLeading, endPoint: .bottomTrailing))
+                            .font(.system(size: 60))
+                            .foregroundStyle(.primary)
                             .padding(.bottom, 8)
                         
                         Text("Plainly")
-                            .font(.system(size: 32, weight: .bold, design: .rounded))
+                            .font(.system(size: 40, weight: .bold, design: .rounded))
                             .tracking(1)
 
                         Text("Simplicity, delivered.")
-                            .font(.subheadline)
+                            .font(.title3)
                             .foregroundColor(.secondary)
                     }
-                    .padding(.top, 40)
                     
-                    // Input Card Component
-                    HomeInputView(viewModel: viewModel)
+                    Spacer()
                     
                     // Suggestions
                     HStack(spacing: 12) {
@@ -47,13 +46,13 @@ struct HomeView: View {
                     
                     Spacer()
                     
-                    // Footer
-                    Label("Private on-device processing available", systemImage: "lock.shield")
-                        .font(.caption)
-                        .foregroundColor(.secondary)
-                        .padding(.bottom)
+                    // Invisible spacer to push content up when input bar is present
+                    Color.clear.frame(height: 100)
                 }
                 .padding()
+                
+                // 3. Floating Bottom Bar
+                HomeInputView(viewModel: viewModel)
             }
             .onTapGesture {
                 hideKeyboard()
@@ -63,7 +62,7 @@ struct HomeView: View {
                     NavigationLink(destination: HistoryView()) {
                         Image(systemName: "clock.arrow.circlepath")
                             .font(.title3)
-                            .foregroundColor(.indigo)
+                            .foregroundColor(.primary)
                     }
                 }
             }

@@ -7,8 +7,7 @@ struct HistoryView: View {
     var body: some View {
         ZStack {
             // Background
-            Color.white.opacity(0.95)
-                .ignoresSafeArea()
+            AppBackground()
             
             VStack {
                 // List
@@ -23,7 +22,7 @@ struct HistoryView: View {
                             })) {
                                 HStack {
                                     Image(systemName: icon(for: item.type))
-                                        .foregroundColor(.white)
+                                        .foregroundStyle(.background)
                                         .padding(8)
                                         .background(color(for: item.type))
                                         .clipShape(Circle())
@@ -73,10 +72,10 @@ struct HistoryView: View {
     
     func color(for type: HistoryItem.HistoryType) -> Color {
         switch type {
-        case .text: return .blue
-        case .url: return .green
-        case .video: return .purple
-        case .image: return .orange
+        case .text: return .primary.opacity(0.8)
+        case .url: return .primary.opacity(0.6)
+        case .video: return .primary.opacity(0.4)
+        case .image: return .primary.opacity(0.2)
         }
     }
 }

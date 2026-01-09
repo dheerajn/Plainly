@@ -126,7 +126,7 @@ struct ExplanationView: View {
                         VStack(spacing: 16) {
                             Image(systemName: "exclamationmark.triangle.fill")
                                 .font(.system(size: 40))
-                                .foregroundStyle(.orange.gradient)
+                                .foregroundStyle(.secondary)
                             Text(error)
                                 .multilineTextAlignment(.center)
                                 .font(.callout)
@@ -204,9 +204,9 @@ struct ExplanationView: View {
                     }
                 }
                 .frame(maxWidth: .infinity, maxHeight: .infinity)
-                .background(.white.opacity(0.7))
+                .background(.ultraThinMaterial)
                 .cornerRadius(AppLayout.cornerRadius, corners: [.topLeft, .topRight])
-                .shadow(color: .black.opacity(0.04), radius: 15, y: -5)
+                .shadow(color: .primary.opacity(0.04), radius: 15, y: -5)
             }
         }
         .task {
