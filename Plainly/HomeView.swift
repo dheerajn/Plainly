@@ -7,6 +7,7 @@ struct HomeView: View {
     // Onboarding State
     @AppStorage("hasShownOnboarding") var hasShownOnboarding: Bool = false
     @State private var showOnboardingSheet = false
+    @State private var showSettings = false
     
     var body: some View {
         NavigationStack {
@@ -64,7 +65,25 @@ struct HomeView: View {
             .onTapGesture {
                 hideKeyboard()
             }
+            .alert(viewModel.permissionAlertTitle, isPresented: $viewModel.showPermissionAlert) {
+                Button("Cancel", role: .cancel) { }
+                Button("Open Settings") {
+                    if let url = URL(string: UIApplication.openSettingsURLString) {
+                        UIApplication.shared.open(url)
+                    }
+                }
+            } message: {
+                Text(viewModel.permissionAlertMessage)
+            }
             .toolbar {
+                ToolbarItem(placement: .navigationBarLeading) {
+                    Button(action: { showSettings = true }) {
+                        Image(systemName: "person.circle")
+                            .font(.title3)
+                            .foregroundColor(.primary)
+                    }
+                }
+                
                 ToolbarItem(placement: .navigationBarTrailing) {
                     NavigationLink(destination: HistoryView()) {
                         Image(systemName: "clock.arrow.circlepath")
@@ -72,6 +91,9 @@ struct HomeView: View {
                             .foregroundColor(.primary)
                     }
                 }
+            }
+            .sheet(isPresented: $showSettings) {
+                SettingsView()
             }
             .navigationBarTitleDisplayMode(.inline)
             .navigationDestination(isPresented: $viewModel.isUnfolded) {

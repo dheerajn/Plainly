@@ -8,10 +8,37 @@ class HomeViewModel: ObservableObject {
     @Published var inputForExplanation: ShareInput?
     @Published var selectedItem: PhotosPickerItem?
     
+    // Permission Alert State
+    @Published var showPermissionAlert = false
+    @Published var permissionAlertTitle = ""
+    @Published var permissionAlertMessage = ""
+    
     // Auto-process media selection
     func handleMediaSelection(_ newItem: PhotosPickerItem?) {
         guard let item = newItem else { return }
         
+        // 1. Check Permissions
+        let status = PHPhotoLibrary.authorizationStatus(for: .readWrite)
+        
+        switch status {
+        case .notDetermined:
+            PHPhotoLibrary.requestAuthorization(for: .readWrite) { newStatus in
+                if newStatus == .authorized || newStatus == .limited {
+                    self.processMediaItem(item)
+                } else {
+                    self.showPermissionError()
+                }
+            }
+        case .authorized, .limited:
+            processMediaItem(item)
+        case .denied, .restricted:
+            showPermissionError()
+        @unknown default:
+            break
+        }
+    }
+    
+    private func processMediaItem(_ item: PhotosPickerItem) {
         Task {
             if let data = try? await item.loadTransferable(type: Data.self) {
                 await MainActor.run {
@@ -29,6 +56,15 @@ class HomeViewModel: ObservableObject {
                     self.selectedItem = nil
                 }
             }
+        }
+    }
+    
+    private func showPermissionError() {
+        DispatchQueue.main.async {
+            self.permissionAlertTitle = "Photo Library Access Required"
+            self.permissionAlertMessage = "Plainly needs permission to access your library to explain images and videos. Please enable access in System Settings."
+            self.showPermissionAlert = true
+            self.selectedItem = nil // Reset selection
         }
     }
     
