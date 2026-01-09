@@ -1,5 +1,6 @@
 import SwiftUI
 import Combine
+import UniformTypeIdentifiers
 
 @MainActor
 class ExplanationViewModel: ObservableObject {
@@ -36,13 +37,15 @@ class ExplanationViewModel: ObservableObject {
         case .url(let url): self.displayInput = url.absoluteString
         case .videoData: self.displayInput = "Uploaded Video"
         case .imageData: self.displayInput = "Uploaded Image"
+        case .document(_, _, let fileName): self.displayInput = "Document: \(fileName)"
+        case .code(_, _, let fileName): self.displayInput = "Source Code: \(fileName)"
         }
     }
     
     private func configureMode(for input: ShareInput) {
         switch input {
-        case .url: self.selectedMode = .gemini
-        case .videoData, .imageData: self.selectedMode = .gemini
+        case .url, .videoData, .imageData, .document, .code:
+            self.selectedMode = .gemini
         case .text(let text):
             self.selectedMode = isYouTubeURL(text) ? .gemini : .onDevice
         }
@@ -94,6 +97,11 @@ class ExplanationViewModel: ObservableObject {
                 markdown = try await geminiService.explainVideoData(data: data)
             case .imageData(let data):
                 markdown = try await geminiService.explainImage(data: data)
+            case .document(let data, let type, let fileName):
+                markdown = try await geminiService.explainDocument(data: data, fileName: fileName, mimeType: type.preferredMIMEType ?? "application/pdf")
+            case .code(let code, _, let fileName):
+                let language = fileName.components(separatedBy: ".").last ?? "Code"
+                markdown = try await geminiService.explainCode(code: code, fileName: fileName, language: language)
             }
             
             // Update Cache
@@ -141,6 +149,14 @@ class ExplanationViewModel: ObservableObject {
             historyType = .image
             historyText = "Image File Upload"
             inputTitle = "Image"
+        case .document(_, _, let fileName):
+            historyType = .document
+            historyText = "Document Upload: \(fileName)"
+            inputTitle = fileName
+        case .code(_, _, let fileName):
+            historyType = .code
+            historyText = "Code Upload: \(fileName)"
+            inputTitle = fileName
         }
         
         let item = HistoryItem(
@@ -174,6 +190,8 @@ class ExplanationViewModel: ObservableObject {
         case .videoData: loadingText = "Analyzing Video..."
         case .imageData: loadingText = "Analyzing Image..."
         case .text: loadingText = "Processing..."
+        case .document: loadingText = "Reading Document..."
+        case .code: loadingText = "Analyzing Code..."
         }
     }
     

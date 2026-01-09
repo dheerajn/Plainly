@@ -76,4 +76,27 @@ actor GeminiService {
             throw error
         }
     }
+
+    func explainDocument(data: Data, fileName: String, mimeType: String) async throws -> String {
+        let ai = FirebaseAI.firebaseAI(backend: .googleAI())
+        let model = ai.generativeModel(modelName: modelName)
+        
+        // Gemini supports PDF as InlineData
+        let docPart = InlineDataPart(data: data, mimeType: mimeType)
+        let prompt = Prompts.documentExplanationPrompt(fileName: fileName)
+        
+        do {
+            let response = try await model.generateContent(prompt, docPart)
+            return response.text ?? "No clear explanation could be generated."
+        } catch {
+            // Fallback for non-PDF or large files: explain based on metadata if needed
+            throw error
+        }
+    }
+
+    func explainCode(code: String, fileName: String, language: String) async throws -> String {
+        let prompt = Prompts.codeExplanationPrompt(fileName: fileName, language: language)
+        let fullPrompt = "\(prompt)\n\nCODE:\n\(code)"
+        return try await generateResponse(prompt: fullPrompt)
+    }
 }

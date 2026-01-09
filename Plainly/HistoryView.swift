@@ -67,6 +67,8 @@ struct HistoryView: View {
         case .url: return "link"
         case .video: return "video.fill"
         case .image: return "photo"
+        case .document: return "doc.text.fill"
+        case .code: return "curlybraces"
         }
     }
     
@@ -76,6 +78,8 @@ struct HistoryView: View {
         case .url: return .primary.opacity(0.6)
         case .video: return .primary.opacity(0.4)
         case .image: return .primary.opacity(0.2)
+        case .document: return .primary.opacity(0.7)
+        case .code: return .primary.opacity(0.5)
         }
     }
 }

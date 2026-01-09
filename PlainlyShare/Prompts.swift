@@ -91,4 +91,57 @@ struct Prompts {
         (Detailed explanation)
         """
     }
+
+    static func documentExplanationPrompt(fileName: String) -> String {
+        """
+        Analyze the attached document and provide a clear, simplified explanation.
+        Document Name: \(fileName)
+        
+        Goal: Break down complex information into plain English for a non-expert.
+        
+        Output Format (Markdown):
+        # TL;DR
+        (A 1-2 sentence executive summary)
+        
+        # Core Message
+        (The primary purpose or "why this matters")
+        
+        # Key Takeaways
+        - (Most important facts, requirements, or data points)
+        
+        # Plain English Explanation
+        (A detailed breakdown of complex sections or terminology)
+        
+        # What This Means for You
+        (Actionable implications or next steps)
+        """
+    }
+
+    static func codeExplanationPrompt(fileName: String, language: String) -> String {
+        """
+        Explain the provided source code in plain English.
+        File: \(fileName)
+        Language: \(language)
+        
+        Goal: Explain WHAT the code does and WHY it exists. Imagine you are explaining it to a non-technical stakeholder or a developer unfamiliar with this specific logic.
+        
+        Instructions:
+        1. Purpose: What is the main goal of this code?
+        2. Logic: Break down the flow in simple terms.
+        3. Edge Cases: Mention any interesting or important constraints if visible.
+        
+        Output Format (Markdown):
+        # TL;DR
+        (A brief 1-sentence summary of what this code accomplishes)
+        
+        # What It Does
+        (A high-level explanation of the logic and flow)
+        
+        # Key Logic
+        - (Highlight the most important functions, classes, or logic blocks)
+        
+        # Plain English Summary
+        (A final summary of the business or functional value of this code)
+        """
+    }
 }

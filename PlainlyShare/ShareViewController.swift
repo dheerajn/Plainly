@@ -45,15 +45,24 @@ class ShareViewController: UIViewController {
         for item in extensionItems {
             if let attachments = item.attachments {
                 for provider in attachments {
-                    // Check for URL first
-                    if provider.hasItemConformingToTypeIdentifier(UTType.url.identifier) {
-                        provider.loadItem(forTypeIdentifier: UTType.url.identifier, options: nil) { (item, error) in
-                            if let url = item as? URL {
-                                DispatchQueue.main.async { completion(.url(url)) }
+                    // Check for PDF
+                    if provider.hasItemConformingToTypeIdentifier(UTType.pdf.identifier) {
+                        provider.loadItem(forTypeIdentifier: UTType.pdf.identifier, options: nil) { (item, error) in
+                            if let url = item as? URL, let data = try? Data(contentsOf: url) {
+                                DispatchQueue.main.async { completion(.document(data, .pdf, fileName: url.lastPathComponent)) }
                                 return
                             }
                         }
-                    } 
+                    }
+                    // Check for Source Code
+                    else if provider.hasItemConformingToTypeIdentifier(UTType.sourceCode.identifier) {
+                        provider.loadItem(forTypeIdentifier: UTType.sourceCode.identifier, options: nil) { (item, error) in
+                            if let url = item as? URL, let code = try? String(contentsOf: url) {
+                                DispatchQueue.main.async { completion(.code(code, .sourceCode, fileName: url.lastPathComponent)) }
+                                return
+                            }
+                        }
+                    }
                     // Check for Video File (Movie)
                     else if provider.hasItemConformingToTypeIdentifier(UTType.movie.identifier) {
                         provider.loadItem(forTypeIdentifier: UTType.movie.identifier, options: nil) { (item, error) in
@@ -81,6 +90,27 @@ class ShareViewController: UIViewController {
                                  return
                              }
                          }
+                    }
+                    // Check for URL (Web Link) - Moved lower to avoid catching file URLs
+                    else if provider.hasItemConformingToTypeIdentifier(UTType.url.identifier) {
+                        provider.loadItem(forTypeIdentifier: UTType.url.identifier, options: nil) { (item, error) in
+                            if let url = item as? URL {
+                                DispatchQueue.main.async { completion(.url(url)) }
+                                return
+                            }
+                        }
+                    } 
+                    // Check for Plain Text Files
+                    else if provider.hasItemConformingToTypeIdentifier(UTType.plainText.identifier) {
+                        provider.loadItem(forTypeIdentifier: UTType.plainText.identifier, options: nil) { (item, error) in
+                            if let url = item as? URL, let text = try? String(contentsOf: url) {
+                                DispatchQueue.main.async { completion(.document(text.data(using: .utf8) ?? Data(), .plainText, fileName: url.lastPathComponent)) }
+                                return
+                            } else if let text = item as? String {
+                                DispatchQueue.main.async { completion(.text(text)) }
+                                return
+                            }
+                        }
                     }
                     // Check for Text
                     else if provider.hasItemConformingToTypeIdentifier(UTType.text.identifier) {

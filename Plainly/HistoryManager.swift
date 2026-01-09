@@ -15,6 +15,8 @@ struct HistoryItem: Codable, Identifiable, Equatable {
         case url
         case image
         case video
+        case document
+        case code
     }
     
     // Dynamic title for legacy support and future consistency
@@ -31,6 +33,9 @@ struct HistoryItem: Codable, Identifiable, Equatable {
         }
         if inputTitle == "YouTube Link" {
             return originalInput
+        }
+        if type == .document || type == .code {
+            return inputTitle // Filename is stored here
         }
         // Fallback to saved title
         return inputTitle
