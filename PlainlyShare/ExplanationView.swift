@@ -91,7 +91,7 @@ struct ModalHeader: View {
                 Image(systemName: "xmark.circle.fill")
                     .font(.system(size: 28))
                     .symbolRenderingMode(.hierarchical)
-                    .foregroundStyle(.secondary)
+                    .foregroundStyle(.white)
             }
             .frame(width: 44, height: 44)
             

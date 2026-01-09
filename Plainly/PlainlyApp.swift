@@ -18,6 +18,7 @@ struct PlainlyApp: App {
     var body: some Scene {
         WindowGroup {
             HomeView()
+                .tint(.primary)
         }
     }
 }

@@ -21,11 +21,20 @@ struct HistoryView: View {
                                 // but we provide dismiss if needed.
                             })) {
                                 HStack {
-                                    Image(systemName: icon(for: item.type))
-                                        .foregroundStyle(.background)
-                                        .padding(8)
-                                        .background(color(for: item.type))
-                                        .clipShape(Circle())
+                                    if let imageData = item.imageData, let uiImage = UIImage(data: imageData) {
+                                        Image(uiImage: uiImage)
+                                            .resizable()
+                                            .aspectRatio(contentMode: .fill)
+                                            .frame(width: 32, height: 32)
+                                            .clipShape(Circle())
+                                    } else {
+                                        Image(systemName: icon(for: item.type))
+                                            .font(.system(size: 14, weight: .semibold))
+                                            .foregroundStyle(.background)
+                                            .frame(width: 32, height: 32)
+                                            .background(color(for: item.type))
+                                            .clipShape(Circle())
+                                    }
                                     
                                     VStack(alignment: .leading) {
                                         Text(item.displayTitle)
