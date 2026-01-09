@@ -93,7 +93,7 @@ struct ModalHeader: View {
                     .symbolRenderingMode(.hierarchical)
                     .foregroundStyle(.white)
             }
-            .frame(width: 44, height: 44)
+            .frame(width: AppLayout.iconButtonSize, height: AppLayout.iconButtonSize)
             
             Spacer()
             
@@ -101,7 +101,7 @@ struct ModalHeader: View {
                 Capsule()
                     .fill(Color.secondary.opacity(0.1))
                     .frame(width: 40, height: 5)
-                    .padding(.vertical, 8)
+                    .padding(.vertical, AppLayout.smallSpacing)
             }
             
             Spacer()
@@ -110,12 +110,12 @@ struct ModalHeader: View {
                 Button(action: onRefresh) {
                     Image(systemName: "arrow.clockwise")
                         .font(.system(size: 14, weight: .bold))
-                        .padding(8)
+                        .padding(AppLayout.smallSpacing)
                         .background(Circle().fill(.secondary.opacity(0.1)))
                 }
                 .disabled(viewModel.isLoading)
             } else {
-                Color.clear.frame(width: 44, height: 44)
+                Color.clear.frame(width: AppLayout.iconButtonSize, height: AppLayout.iconButtonSize)
             }
         }
         .padding(.horizontal)
@@ -130,7 +130,7 @@ struct ModeSelector: View {
     let context: ExplanationView.PresentationContext
     
     var body: some View {
-        VStack(spacing: 8) {
+        VStack(spacing: AppLayout.smallSpacing) {
             HStack(alignment: .center) {
                 if viewModel.shouldShowModePicker(for: input) {
                     Picker("Mode", selection: $viewModel.selectedMode) {
@@ -149,13 +149,13 @@ struct ModeSelector: View {
                 }
             }
             .padding(.horizontal)
-            .padding(.vertical, 8)
+            .padding(.vertical, AppLayout.smallSpacing)
             
             if viewModel.shouldShowModePicker(for: input) {
                 Text(viewModel.selectedMode == .onDevice ? "🔒 Private On-Device Processing" : "☁️ Secured Cloud Processing")
                     .font(.caption2)
                     .foregroundStyle(.secondary)
-                    .padding(.bottom, 8)
+                    .padding(.bottom, AppLayout.smallSpacing)
             }
         }
     }
@@ -263,7 +263,7 @@ struct InputReferenceSection: View {
                 .padding()
                 .frame(maxWidth: .infinity, alignment: .leading)
                 .background(Color.secondary.opacity(0.05))
-                .cornerRadius(12)
+                .cornerRadius(AppLayout.smallCornerRadius)
         }
     }
 }
@@ -282,7 +282,7 @@ struct ImageReferenceSection: View {
                 .resizable()
                 .aspectRatio(contentMode: .fit)
                 .frame(maxWidth: .infinity)
-                .cornerRadius(12)
+                .cornerRadius(AppLayout.smallCornerRadius)
                 .shadow(color: .black.opacity(0.1), radius: 5)
         }
     }
