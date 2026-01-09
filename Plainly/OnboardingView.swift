@@ -17,7 +17,7 @@ struct OnboardingView: View {
             OnboardingSlide(
                 image: "lock.shield",
                 title: "Unmatched Privacy",
-                description: "We believe your data is yours. Choose 'On-Device' for 100% private processing that never leaves your phone."
+                description: "We prioritize your privacy. We process on-device whenever possible, but may use secure cloud processing when needed to provide the best results."
             )
             
             // Slide 3: Get Started
@@ -46,6 +46,10 @@ struct OnboardingView: View {
         }
         .tabViewStyle(.page)
         .indexViewStyle(.page(backgroundDisplayMode: .always))
+        .onAppear {
+            UIPageControl.appearance().currentPageIndicatorTintColor = .black
+            UIPageControl.appearance().pageIndicatorTintColor = UIColor.black.withAlphaComponent(0.2)
+        }
         .appBackground()
     }
 }

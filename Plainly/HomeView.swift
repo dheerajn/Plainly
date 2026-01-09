@@ -113,6 +113,11 @@ struct HomeView: View {
                 showOnboardingSheet = true
             }
         }
+        .onChange(of: hasShownOnboarding) { newValue in
+            if !newValue {
+                showOnboardingSheet = true
+            }
+        }
         .sheet(isPresented: $showOnboardingSheet) {
             OnboardingView()
         }

@@ -3,7 +3,7 @@ import StoreKit
 
 struct SettingsView: View {
     @Environment(\.dismiss) var dismiss
-    @AppStorage("hasShownOnboarding") var hasShownOnboarding: Bool = true
+    @AppStorage("hasShownOnboarding") var hasShownOnboarding: Bool = false
     
     // Version info
     private var appVersion: String {
@@ -21,7 +21,7 @@ struct SettingsView: View {
                             .font(.headline)
                             .foregroundStyle(.primary)
                         
-                        Text("Plainly is designed to be private. Your data is never sold or shared for advertising. 'On-Device' mode ensures 100% private processing right on your phone.")
+                        Text("Plainly is designed to be private. Your data is never sold or shared for advertising. We process on-device whenever possible, but may use secure cloud processing when needed to provide the best results.")
                             .font(.subheadline)
                             .foregroundStyle(.secondary)
                     }
