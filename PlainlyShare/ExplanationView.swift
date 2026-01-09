@@ -251,19 +251,42 @@ struct ExplanationDetailView: View {
 struct InputReferenceSection: View {
     let title: String
     let content: String
+    @State private var isExpanded = false
+    
     var body: some View {
         VStack(alignment: .leading, spacing: 8) {
-            Text(title)
-                .font(.caption2.bold())
-                .foregroundColor(.secondary)
-                .tracking(1)
+            Button(action: { withAnimation(.spring(response: 0.35, dampingFraction: 0.7)) { isExpanded.toggle() } }) {
+                HStack {
+                    Text(title)
+                        .font(.caption2.bold())
+                        .foregroundColor(.secondary)
+                        .tracking(1)
+                    
+                    Spacer()
+                    
+                    Image(systemName: "chevron.right")
+                        .font(.system(size: 10, weight: .bold))
+                        .foregroundColor(.secondary.opacity(0.5))
+                        .rotationEffect(.degrees(isExpanded ? 90 : 0))
+                }
+            }
+            .buttonStyle(.plain)
             
-            Text(content)
-                .font(.system(.body, design: .rounded))
-                .padding()
-                .frame(maxWidth: .infinity, alignment: .leading)
-                .background(Color.secondary.opacity(0.05))
-                .cornerRadius(AppLayout.smallCornerRadius)
+            if isExpanded {
+                Text(content)
+                    .font(.system(.body, design: .rounded))
+                    .padding()
+                    .frame(maxWidth: .infinity, alignment: .leading)
+                    .background(Color.secondary.opacity(0.05))
+                    .cornerRadius(AppLayout.smallCornerRadius)
+                    .transition(.opacity.combined(with: .move(edge: .top)))
+            } else {
+                Text(content)
+                    .font(.system(.subheadline, design: .rounded))
+                    .foregroundColor(.secondary)
+                    .lineLimit(1)
+                    .padding(.horizontal, 4)
+            }
         }
     }
 }
@@ -271,19 +294,36 @@ struct InputReferenceSection: View {
 struct ImageReferenceSection: View {
     let title: String
     let uiImage: UIImage
+    @State private var isExpanded = false
+    
     var body: some View {
         VStack(alignment: .leading, spacing: 8) {
-            Text(title)
-                .font(.caption2.bold())
-                .foregroundColor(.secondary)
-                .tracking(1)
+            Button(action: { withAnimation(.spring(response: 0.35, dampingFraction: 0.7)) { isExpanded.toggle() } }) {
+                HStack {
+                    Text(title)
+                        .font(.caption2.bold())
+                        .foregroundColor(.secondary)
+                        .tracking(1)
+                    
+                    Spacer()
+                    
+                    Image(systemName: "chevron.right")
+                        .font(.system(size: 10, weight: .bold))
+                        .foregroundColor(.secondary.opacity(0.5))
+                        .rotationEffect(.degrees(isExpanded ? 90 : 0))
+                }
+            }
+            .buttonStyle(.plain)
             
-            Image(uiImage: uiImage)
-                .resizable()
-                .aspectRatio(contentMode: .fit)
-                .frame(maxWidth: .infinity)
-                .cornerRadius(AppLayout.smallCornerRadius)
-                .shadow(color: .black.opacity(0.1), radius: 5)
+            if isExpanded {
+                Image(uiImage: uiImage)
+                    .resizable()
+                    .aspectRatio(contentMode: .fit)
+                    .frame(maxWidth: .infinity)
+                    .cornerRadius(AppLayout.smallCornerRadius)
+                    .shadow(color: .black.opacity(0.1), radius: 5)
+                    .transition(.opacity.combined(with: .scale(scale: 0.95, anchor: .top)))
+            }
         }
     }
 }
