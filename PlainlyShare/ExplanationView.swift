@@ -218,6 +218,7 @@ struct LoadingView: View {
 struct ExplanationDetailView: View {
     @ObservedObject var viewModel: ExplanationViewModel
     let result: ExplanationResult
+    @State private var showingCopied = false
     
     var body: some View {
         ScrollView {
@@ -235,10 +236,47 @@ struct ExplanationDetailView: View {
                 Divider()
                 
                 VStack(alignment: .leading, spacing: 8) {
-                    Text("EXPLANATION")
-                        .font(.caption2.bold())
-                        .foregroundColor(.secondary)
-                        .tracking(1)
+                    HStack {
+                        Text("EXPLANATION")
+                            .font(.caption2.bold())
+                            .foregroundColor(.secondary)
+                            .tracking(1)
+                        
+                        Spacer()
+                        
+                        Button(action: {
+                            viewModel.copyToClipboard(markdown: result.markdown)
+                            withAnimation(.spring(response: 0.3, dampingFraction: 0.7)) {
+                                showingCopied = true
+                            }
+                            DispatchQueue.main.asyncAfter(deadline: .now() + 2) {
+                                withAnimation {
+                                    showingCopied = false
+                                }
+                            }
+                        }) {
+                            HStack(spacing: 4) {
+                                Image(systemName: showingCopied ? "checkmark" : "doc.on.doc")
+                                    .font(.system(size: 10, weight: .bold))
+                                Text(showingCopied ? "COPIED" : "COPY")
+                                    .font(.caption2.bold())
+                            }
+                            .foregroundStyle(showingCopied ? .green : .primary.opacity(0.7))
+                            .padding(.vertical, 6)
+                            .padding(.horizontal, 10)
+                            .background {
+                                Capsule()
+                                    .fill(Color.primary.opacity(0.05))
+                                    .overlay {
+                                        Capsule()
+                                            .stroke(Color.primary.opacity(0.1), lineWidth: 0.5)
+                                    }
+                            }
+                        }
+                        .buttonStyle(.plain)
+                        .scaleEffect(showingCopied ? 1.1 : 1.0)
+                        .animation(.spring(response: 0.3, dampingFraction: 0.6), value: showingCopied)
+                    }
                     
                     StructuredText(markdown: result.markdown)
                 }
@@ -254,21 +292,38 @@ struct InputReferenceSection: View {
     @State private var isExpanded = false
     
     var body: some View {
-        VStack(alignment: .leading, spacing: 8) {
+        VStack(alignment: .leading, spacing: 6) {
+            Text(title)
+                .font(.caption.bold())
+                .foregroundColor(.secondary)
+                .tracking(1)
+            
             Button(action: { withAnimation(.spring(response: 0.35, dampingFraction: 0.7)) { isExpanded.toggle() } }) {
-                HStack {
-                    Text(title)
-                        .font(.caption2.bold())
-                        .foregroundColor(.secondary)
-                        .tracking(1)
+                HStack(spacing: 8) {
+                    if !isExpanded {
+                        Text(content)
+                            .font(.system(.subheadline, design: .rounded))
+                            .foregroundColor(.primary)
+                            .lineLimit(1)
+                            .transition(.opacity)
+                    } else {
+                        Text("Hide original request")
+                            .font(.caption)
+                            .foregroundColor(.primary.opacity(0.8))
+                    }
                     
                     Spacer()
                     
                     Image(systemName: "chevron.right")
-                        .font(.system(size: 10, weight: .bold))
-                        .foregroundColor(.secondary.opacity(0.5))
+                        .font(.system(size: 16, weight: .bold))
+                        .foregroundColor(.secondary)
                         .rotationEffect(.degrees(isExpanded ? 90 : 0))
                 }
+                .padding(.vertical, 8)
+                .padding(.horizontal, 10)
+                .background(Color.secondary.opacity(0.05))
+                .cornerRadius(AppLayout.smallCornerRadius)
+                .contentShape(Rectangle())
             }
             .buttonStyle(.plain)
             
@@ -279,13 +334,10 @@ struct InputReferenceSection: View {
                     .frame(maxWidth: .infinity, alignment: .leading)
                     .background(Color.secondary.opacity(0.05))
                     .cornerRadius(AppLayout.smallCornerRadius)
-                    .transition(.opacity.combined(with: .move(edge: .top)))
-            } else {
-                Text(content)
-                    .font(.system(.subheadline, design: .rounded))
-                    .foregroundColor(.secondary)
-                    .lineLimit(1)
-                    .padding(.horizontal, 4)
+                    .transition(.asymmetric(
+                        insertion: .opacity.combined(with: .move(edge: .top)),
+                        removal: .opacity.combined(with: .move(edge: .top))
+                    ))
             }
         }
     }
@@ -297,21 +349,41 @@ struct ImageReferenceSection: View {
     @State private var isExpanded = false
     
     var body: some View {
-        VStack(alignment: .leading, spacing: 8) {
+        VStack(alignment: .leading, spacing: 6) {
+            Text(title)
+                .font(.caption.bold())
+                .foregroundColor(.secondary)
+                .tracking(1)
+            
             Button(action: { withAnimation(.spring(response: 0.35, dampingFraction: 0.7)) { isExpanded.toggle() } }) {
-                HStack {
-                    Text(title)
-                        .font(.caption2.bold())
+                HStack(spacing: 8) {
+                    if !isExpanded {
+                        HStack(spacing: 4) {
+                            Image(systemName: "photo")
+                                .font(.caption2)
+                            Text("Image Attached")
+                                .font(.caption)
+                        }
                         .foregroundColor(.secondary)
-                        .tracking(1)
+                        .transition(.opacity)
+                    } else {
+                        Text("Hide image")
+                            .font(.caption)
+                            .foregroundColor(.secondary.opacity(0.8))
+                    }
                     
                     Spacer()
                     
                     Image(systemName: "chevron.right")
-                        .font(.system(size: 10, weight: .bold))
-                        .foregroundColor(.secondary.opacity(0.5))
+                        .font(.system(size: 16, weight: .bold))
+                        .foregroundColor(.secondary)
                         .rotationEffect(.degrees(isExpanded ? 90 : 0))
                 }
+                .padding(.vertical, 8)
+                .padding(.horizontal, 10)
+                .background(Color.secondary.opacity(0.05))
+                .cornerRadius(AppLayout.smallCornerRadius)
+                .contentShape(Rectangle())
             }
             .buttonStyle(.plain)
             
@@ -322,7 +394,10 @@ struct ImageReferenceSection: View {
                     .frame(maxWidth: .infinity)
                     .cornerRadius(AppLayout.smallCornerRadius)
                     .shadow(color: .black.opacity(0.1), radius: 5)
-                    .transition(.opacity.combined(with: .scale(scale: 0.95, anchor: .top)))
+                    .transition(.asymmetric(
+                        insertion: .opacity.combined(with: .scale(scale: 0.95, anchor: .top)),
+                        removal: .opacity.combined(with: .scale(scale: 0.95, anchor: .top))
+                    ))
             }
         }
     }

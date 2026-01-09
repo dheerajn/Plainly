@@ -1,6 +1,7 @@
 import SwiftUI
 import Combine
 import UniformTypeIdentifiers
+import UIKit
 
 @MainActor
 class ExplanationViewModel: ObservableObject {
@@ -221,5 +222,65 @@ class ExplanationViewModel: ObservableObject {
             return !isYouTubeURL(text)
         }
         return false
+    }
+
+    func copyToClipboard(markdown: String) {
+        do {
+            // Parse Markdown to AttributedString
+            // We use inlineOnlyPreservingWhitespace to keep it simple, 
+            // but we can try full markdown support if needed.
+            let options = AttributedString.MarkdownParsingOptions(interpretedSyntax: .inlineOnlyPreservingWhitespace)
+            let attributedString = try AttributedString(markdown: markdown, options: options)
+            
+            // Convert to NSAttributedString to manipulate fonts and export to RTF
+            let nsAttributedString = NSMutableAttributedString(attributedString: NSAttributedString(attributedString))
+            let fullRange = NSRange(location: 0, length: nsAttributedString.length)
+            
+            // Apply Rounded Font Design
+            let baseFont = UIFont.preferredFont(forTextStyle: .body)
+            let roundedFont: UIFont
+            if let descriptor = baseFont.fontDescriptor.withDesign(.rounded) {
+                roundedFont = UIFont(descriptor: descriptor, size: baseFont.pointSize)
+            } else {
+                roundedFont = baseFont
+            }
+            
+            // Update the font while preserving other traits like bold/italic if possible
+            // A more robust way is to enumerate attributes and swap descriptors
+            nsAttributedString.enumerateAttribute(NSAttributedString.Key.font, in: fullRange, options: []) { (font, range, stop) in
+                if let currentFont = font as? UIFont {
+                    if let descriptor = currentFont.fontDescriptor.withDesign(.rounded) {
+                        let newFont = UIFont(descriptor: descriptor, size: currentFont.pointSize)
+                        nsAttributedString.addAttribute(NSAttributedString.Key.font, value: newFont, range: range)
+                    }
+                } else {
+                    nsAttributedString.addAttribute(NSAttributedString.Key.font, value: roundedFont, range: range)
+                }
+            }
+            
+            // Set Pasteboard Items
+            let pasteboard = UIPasteboard.general
+            var items: [String: Any] = [
+                UTType.plainText.identifier: nsAttributedString.string
+            ]
+            
+            // Add RTF if possible
+            if let rtfData = try? nsAttributedString.data(from: fullRange, documentAttributes: [NSAttributedString.DocumentAttributeKey.documentType: NSAttributedString.DocumentType.rtf]) {
+                items[UTType.rtf.identifier] = rtfData
+            }
+            
+            pasteboard.items = [items]
+            
+            // Provide Haptic Feedback
+            let generator = UINotificationFeedbackGenerator()
+            generator.notificationOccurred(.success)
+            
+        } catch {
+            print("Error parsing markdown for clipboard: \(error)")
+            UIPasteboard.general.string = markdown
+            
+            let generator = UINotificationFeedbackGenerator()
+            generator.notificationOccurred(.warning)
+        }
     }
 }
