@@ -39,6 +39,7 @@ struct HomeInputView: View {
                 
                 // Explain Button
                 Button(action: {
+                    hideKeyboard()
                     viewModel.startExplanation()
                 }) {
                     HStack {

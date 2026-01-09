@@ -29,7 +29,7 @@ struct HistoryView: View {
                                         .clipShape(Circle())
                                     
                                     VStack(alignment: .leading) {
-                                        Text(item.inputTitle)
+                                        Text(item.displayTitle)
                                             .font(.headline)
                                             .lineLimit(1)
                                             .foregroundColor(.primary)

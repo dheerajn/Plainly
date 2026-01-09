@@ -16,6 +16,25 @@ struct HistoryItem: Codable, Identifiable, Equatable {
         case image
         case video
     }
+    
+    // Dynamic title for legacy support and future consistency
+    var displayTitle: String {
+        // If the saved title is generic (legacy), use the original input or type name
+        if inputTitle == "Url" {
+            return originalInput
+        }
+        if inputTitle == "Image" {
+            return "Image"
+        }
+        if inputTitle == "Video" || inputTitle == "Video File Upload" {
+            return "Video Clip"
+        }
+        if inputTitle == "YouTube Link" {
+            return originalInput
+        }
+        // Fallback to saved title
+        return inputTitle
+    }
 }
 
 class HistoryManager {

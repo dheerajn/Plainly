@@ -117,25 +117,35 @@ class ExplanationViewModel: ObservableObject {
     private func saveToHistory(input: ShareInput, markdown: String) {
         let historyType: HistoryItem.HistoryType
         let historyText: String
+        let inputTitle: String
         
         switch input {
         case .text(let text):
             historyType = .text
             historyText = text
+            if isYouTubeURL(text) {
+                inputTitle = text // Show full YouTube URL
+            } else {
+                // First line of text
+                inputTitle = text.components(separatedBy: .newlines).first ?? "Text Request"
+            }
         case .url(let url):
             historyType = .url
             historyText = url.absoluteString
+            inputTitle = historyText // Full link (including YouTube)
         case .videoData:
             historyType = .video
             historyText = "Video File Upload"
+            inputTitle = "Video Clip"
         case .imageData:
             historyType = .image
             historyText = "Image File Upload"
+            inputTitle = "Image"
         }
         
         let item = HistoryItem(
             date: Date(),
-            inputTitle: historyType == .text ? String(historyText.prefix(40)) : historyType.rawValue.capitalized,
+            inputTitle: inputTitle,
             originalInput: historyText,
             resultMarkdown: markdown,
             isCloud: self.selectedMode == .gemini,
