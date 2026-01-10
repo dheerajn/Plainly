@@ -16,7 +16,7 @@ struct SettingsView: View {
         NavigationStack {
             List {
                 Section {
-                    VStack(alignment: .leading, spacing: 8) {
+                    VStack(alignment: .leading, spacing: 12) {
                         Label("Your Privacy", systemImage: "lock.shield.fill")
                             .font(.headline)
                             .foregroundStyle(.primary)
@@ -24,6 +24,17 @@ struct SettingsView: View {
                         Text("Plainly is designed to be private. Your data is never sold or shared for advertising. We process on-device whenever possible, but may use secure cloud processing when needed to provide the best results.")
                             .font(.subheadline)
                             .foregroundStyle(.secondary)
+                        
+                        Link(destination: URL(string: "https://dheerajn.github.io/Plainly/privacy")!) {
+                            HStack {
+                                Text("Privacy Policy")
+                                Spacer()
+                                Image(systemName: "arrow.up.right")
+                                    .font(.caption)
+                            }
+                            .font(.subheadline)
+                            .foregroundStyle(.blue)
+                        }
                     }
                     .padding(.vertical, 4)
                 } header: {
