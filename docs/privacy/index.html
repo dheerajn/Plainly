@@ -1,5 +1,6 @@
 <!DOCTYPE html>
 <html lang="en">
+
 <head>
     <meta charset="UTF-8">
     <meta name="viewport" content="width=device-width, initial-scale=1.0">
@@ -7,7 +8,7 @@
     <style>
         :root {
             --primary-color: #000000;
-            --secondary-color: #666666;
+            --secondary-color: #4b4b4b;
             --background-color: #ffffff;
             --accent-color: #f5f5f7;
             --font-family: -apple-system, BlinkMacSystemFont, "Segoe UI", Roboto, Helvetica, Arial, sans-serif, "Apple Color Emoji", "Segoe UI Emoji", "Segoe UI Symbol";
@@ -27,101 +28,226 @@
 
         header {
             width: 100%;
-            padding: 40px 20px;
+            padding: 60px 20px;
             text-align: center;
-            background-color: var(--accent-color);
-            border-bottom: 1px solid #e5e5e5;
+            background-color: var(--background-color);
+            border-bottom: 1px solid #f0f0f0;
         }
 
         .container {
-            max-width: 800px;
+            max-width: 720px;
             width: 90%;
-            padding: 40px 0;
+            padding: 60px 0;
         }
 
         h1 {
-            font-size: 2.5rem;
+            font-size: 2.8rem;
             margin-bottom: 10px;
-            font-weight: 700;
-            letter-spacing: -0.02em;
+            font-weight: 800;
+            letter-spacing: -0.03em;
         }
 
         h2 {
-            font-size: 1.5rem;
-            margin-top: 40px;
-            margin-bottom: 15px;
+            font-size: 1.6rem;
+            margin-top: 50px;
+            margin-bottom: 20px;
+            font-weight: 700;
+            letter-spacing: -0.01em;
+            border-bottom: 1px solid #f0f0f0;
+            padding-bottom: 10px;
+        }
+
+        h3 {
+            font-size: 1.2rem;
+            margin-top: 30px;
+            margin-bottom: 10px;
             font-weight: 600;
         }
 
         p {
-            margin-bottom: 20px;
+            margin-bottom: 22px;
             color: var(--secondary-color);
+            font-size: 1.1rem;
+        }
+
+        ul {
+            margin-bottom: 22px;
+            padding-left: 20px;
+        }
+
+        li {
+            margin-bottom: 12px;
+            color: var(--secondary-color);
+            font-size: 1.05rem;
         }
 
         .last-updated {
-            font-size: 0.9rem;
-            color: #999;
+            font-size: 0.95rem;
+            color: #86868b;
             margin-bottom: 40px;
+            text-transform: uppercase;
+            letter-spacing: 0.05em;
         }
 
         footer {
             width: 100%;
-            padding: 40px 20px;
+            padding: 60px 20px;
             text-align: center;
             font-size: 0.9rem;
-            color: #999;
-            border-top: 1px solid #e5e5e5;
-            margin-top: 60px;
+            color: #86868b;
+            border-top: 1px solid #f0f0f0;
+            background-color: var(--accent-color);
         }
 
-        .icon {
-            font-size: 40px;
-            margin-bottom: 20px;
+        .app-icon {
+            width: 120px;
+            height: 120px;
+            border-radius: 26px;
+            margin-bottom: 24px;
+            box-shadow: 0 10px 30px rgba(0, 0, 0, 0.08);
+        }
+
+        .nav-link {
+            text-decoration: none;
+            color: #0066cc;
+        }
+
+        .nav-link:hover {
+            text-decoration: underline;
+        }
+
+        .section-card {
+            background: #f9f9fb;
+            padding: 24px;
+            border-radius: 16px;
+            margin-bottom: 24px;
+        }
+
+        @media (max-width: 600px) {
+            h1 {
+                font-size: 2.2rem;
+            }
+
+            .container {
+                padding: 40px 0;
+            }
         }
     </style>
 </head>
+
 <body>
     <header>
-        <div class="icon">✨</div>
+        <img src="icon.png" alt="Plainly Icon" class="app-icon">
         <h1>Plainly</h1>
-        <p>Clarity, Instant & Integrated.</p>
+        <p style="font-size: 1.25rem;">Clarity, Instant & Integrated.</p>
     </header>
 
     <div class="container">
-        <h1>Privacy Policy</h1>
         <p class="last-updated">Last Updated: January 10, 2026</p>
 
-        <p>At Plainly, we take your privacy seriously. This Privacy Policy describes how your personal information is collected, used, and shared when you install or use the Plainly app.</p>
+        <p>At Plainly, we believe that your data belongs to you. This Privacy Policy outlines our commitment to
+            protecting your privacy while providing you with high-quality AI-driven clarity across your digital life.
+        </p>
 
-        <h2>1. Data Collection</h2>
-        <p>Plainly is designed to collect as little data as possible. We do not require you to create an account to use the application. Any content you share with Plainly (text, links, images, or documents) is used solely for the purpose of providing you with an explanation or summary.</p>
+        <h2>1. Principles of Privacy</h2>
+        <div class="section-card">
+            <ul>
+                <li><strong>No Accounts:</strong> We don't require registration or login. You remain anonymous.</li>
+                <li><strong>On-Device First:</strong> We prioritize local processing on your iPhone/iPad whenever
+                    possible.</li>
+                <li><strong>No Data Harvesting:</strong> We do not sell, rent, or trade your data for advertising or any
+                    other purpose.</li>
+                <li><strong>Local History:</strong> Your history stays on your device, not on our servers.</li>
+            </ul>
+        </div>
 
-        <h2>2. Data Processing</h2>
-        <p>To provide high-quality explanations, Plainly uses a combination of on-device processing and secure cloud-based AI services (such as Google Gemini). When cloud processing is required:</p>
+        <h2>2. Information We Process</h2>
+        <p>Plainly processes the content you explicitly share with the app to generate explanations, summaries, or
+            insights. This includes:</p>
+
+        <h3>Content Types</h3>
         <ul>
-            <li>Your data is transmitted securely via encrypted connections.</li>
-            <li>Your data is used only to generate the requested summary or explanation.</li>
-            <li>We do not use your data to train AI models or for any purpose other than providing the service to you.</li>
+            <li><strong>Text Snippets:</strong> Shared or copied text from any application.</li>
+            <li><strong>URLs & Links:</strong> Web addresses for summarization (including YouTube videos).</li>
+            <li><strong>Media:</strong> Images (Photos) and Video clips you share for analysis.</li>
+            <li><strong>Documents:</strong> PDFs and text-based files for document insights.</li>
+            <li><strong>Source Code:</strong> Programmatic files for code explanations.</li>
         </ul>
 
-        <h2>3. Third-Party Services</h2>
-        <p>We do not sell your personal information to third parties. We do not share your data with advertisers. The only third-party services used are those necessary for the core functionality of the app (e.g., AI processing providers), and they are bound by strict confidentiality and security requirements.</p>
+        <h2>3. How We Process Data</h2>
+        <p>To provide advanced AI features, Plainly uses <strong>Google Gemini</strong> via secure <strong>Firebase
+                AI</strong> infrastructure.</p>
 
-        <h2>4. Data Storage</h2>
-        <p>Your history is stored locally on your device. You can clear your history at any time through the app settings. We do not maintain a permanent record of your processed content on our servers beyond what is necessary for immediate processing.</p>
+        <h3>Secure Cloud Processing</h3>
+        <p>When content is sent to the cloud for processing:</p>
+        <ul>
+            <li><strong>Encryption:</strong> Data is transmitted using industry-standard HTTPS/TLS encryption.</li>
+            <li><strong>Zero Training:</strong> Under our current configuration, your data is not used to train or
+                improve Google's underlying AI models.</li>
+            <li><strong>Immediate Deletion:</strong> Content is processed in memory and is not permanently retained on
+                our servers after the explanation is generated.</li>
+        </ul>
 
-        <h2>5. Your Choices</h2>
-        <p>You have full control over your data. Since your history is stored on-device, you can delete it at any time. If you choose not to share content with the app, the core functionality will not be available, but your privacy remains protected.</p>
+        <h2>4. Data Storage & Management</h2>
+        <p>Plainly maintains a history of your explanations so you can refer back to them. This history is stored
+            <strong>exclusively on your device</strong> within an App Group container.
+        </p>
+        <ul>
+            <li><strong>User Control:</strong> You can delete individual items or clear your entire history at any time
+                through the Settings menu.</li>
+            <li><strong>iCloud:</strong> If you have iCloud backups enabled, your local history may be included in those
+                backups according to your system settings.</li>
+        </ul>
 
-        <h2>6. Changes to This Policy</h2>
-        <p>We may update this privacy policy from time to time to reflect changes in our practices or for other operational, legal, or regulatory reasons.</p>
+        <h2>5. Third-Party Services</h2>
+        <p>We use the following third-party infrastructure to provide our services:</p>
+        <ul>
+            <li><strong>Firebase/Google AI:</strong> For providing the Gemini AI models that power our explanations.
+            </li>
+            <li><strong>Apple:</strong> For app distribution, crash reporting, and analytics (if opted-in via system
+                settings).</li>
+        </ul>
 
-        <h2>7. Contact Us</h2>
-        <p>If you have questions or concerns about our privacy practices, please contact us at <a href="mailto:support@plainly.app" style="color: inherit;">support@plainly.app</a>.</p>
+        <h2>6. Security Measures</h2>
+        <p>We implement rigorous technical and organizational measures to protect your data, including:</p>
+        <ul>
+            <li>Use of secure App Sandboxing on iOS/iPadOS.</li>
+            <li>Strict adherence to Apple's Human Interface and Privacy Guidelines.</li>
+            <li>Minimizing data points collected to the absolute necessity for processing.</li>
+        </ul>
+
+        <h2>7. Compliance & Rights</h2>
+        <p>Plainly is designed to be compliant with major privacy regulations including GDPR (General Data Protection
+            Regulation) and CCPA (California Consumer Privacy Act). Since we do not collect personal identifiers, your
+            "Right to be Forgotten" is as simple as deleting the app or clearing your local history.</p>
+
+        <h2>8. Children's Privacy</h2>
+        <p>Our services are not directed to children under the age of 13. We do not knowingly collect or process data
+            from children.</p>
+
+        <h2>9. Disclaimer & Limitation of Liability</h2>
+        <div class="section-card">
+            <p><strong>Informational Purposes Only:</strong> Plainly is designed solely for informational and
+                educational purposes to help users gain clarity and insights in their daily lives. While we strive for
+                accuracy, the information generated by AI models is provided "as is" and should not be relied upon for
+                critical decision-making.</p>
+            <p><strong>No Responsibility:</strong> The developer and any affiliated parties are not responsible or
+                liable for any actions taken, or any damages or losses incurred, as a result of using the information
+                provided by the app. Use of the app is at your own risk.</p>
+        </div>
+
+        <h2>10. Changes to This Policy</h2>
+        <p>We may update this policy to reflect app improvements or regulatory changes. Any updates will be reflected
+            here with a new "Last Updated" date.</p>
+
+        <h2>10. Contact Us</h2>
+        <p>If you have any questions or feedback regarding your privacy, please reach out to us at:</p>
+        <p><strong>Email:</strong> <a href="mailto:support@plainly.app" class="nav-link">support@plainly.app</a></p>
     </div>
 
     <footer>
-        &copy; 2026 Plainly App. All rights reserved.
+        &copy; 2026 Plainly App. Built for clarity.
     </footer>
 </body>
+
 </html>
