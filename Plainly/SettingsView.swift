@@ -64,8 +64,8 @@ struct SettingsView: View {
                         Label("Share with Friends", systemImage: "square.and.arrow.up")
                     }
                     
-                    Link(destination: URL(string: "mailto:support@plainly.app")!) {
-                        Label("Contact Support", systemImage: "envelope.fill")
+                    Link(destination: URL(string: "https://x.com/dheerun1210")!) {
+                        Label("Contact Support", systemImage: "x.square.fill")
                     }
                 } header: {
                     Text("Feedback & Support")
