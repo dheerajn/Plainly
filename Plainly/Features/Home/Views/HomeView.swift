@@ -21,10 +21,23 @@ struct HomeView: View {
                     
                     // Title Group
                     VStack(spacing: AppLayout.smallSpacing) {
-                        Image(systemName: "sparkles")
-                            .font(.system(size: 60))
-                            .foregroundStyle(.primary)
-                            .padding(.bottom, AppLayout.smallSpacing)
+                        if let appIconName = Bundle.main.object(forInfoDictionaryKey: "CFBundleIcons") as? [String: Any],
+                           let primaryIcon = appIconName["CFBundlePrimaryIcon"] as? [String: Any],
+                           let iconFiles = primaryIcon["CFBundleIconFiles"] as? [String],
+                           let iconFileName = iconFiles.last,
+                           let appIcon = UIImage(named: iconFileName) {
+                            Image(uiImage: appIcon)
+                                .resizable()
+                                .aspectRatio(contentMode: .fit)
+                                .frame(width: 80, height: 80)
+                                .clipShape(RoundedRectangle(cornerRadius: 18))
+                                .padding(.bottom, AppLayout.smallSpacing)
+                        } else {
+                            Image(systemName: "sparkles")
+                                .font(.system(size: 60))
+                                .foregroundStyle(.primary)
+                                .padding(.bottom, AppLayout.smallSpacing)
+                        }
                         
                         Text("Plainly")
                             .font(.system(size: 40, weight: .bold, design: .rounded))
@@ -113,7 +126,7 @@ struct HomeView: View {
                 showOnboardingSheet = true
             }
         }
-        .onChange(of: hasShownOnboarding) { newValue in
+        .onChange(of: hasShownOnboarding) { _, newValue in
             if !newValue {
                 showOnboardingSheet = true
             }
