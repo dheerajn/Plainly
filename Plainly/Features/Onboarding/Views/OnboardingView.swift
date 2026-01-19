@@ -10,7 +10,7 @@ struct OnboardingView: View {
             OnboardingSlide(
                 image: "sparkles",
                 title: "Clarity, Instant & Integrated",
-                description: "Plainly lives where you are. Get instant summaries from any app using the share sheet—no more copying and switching apps."
+                description: "HiddenLine lives where you are. Get instant summaries from any app using the share sheet—no more copying and switching apps."
             )
             
             // Slide 2: Modes
@@ -25,7 +25,7 @@ struct OnboardingView: View {
                 OnboardingSlide(
                     image: "hand.tap",
                     title: "Ready?",
-                    description: "Share text, links, videos, images, documents, or code from any app to Plainly to get instant summaries."
+                    description: "Share text, links, videos, images, documents, or code from any app to HiddenLine to get instant summaries."
                 )
                 
                 Button(action: {

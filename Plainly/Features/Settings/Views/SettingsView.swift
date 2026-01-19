@@ -21,7 +21,7 @@ struct SettingsView: View {
                             .font(.headline)
                             .foregroundStyle(.primary)
                         
-                        Text("Plainly is designed to be private. Your data is never sold or shared for advertising. We process on-device whenever possible, but may use secure cloud processing when needed to provide the best results.")
+                        Text("HiddenLine is designed to be private. Your data is never sold or shared for advertising. We process on-device whenever possible, but may use secure cloud processing when needed to provide the best results.")
                             .font(.subheadline)
                             .foregroundStyle(.secondary)
                         
@@ -55,7 +55,7 @@ struct SettingsView: View {
                     Button {
                         rateApp()
                     } label: {
-                        Label("Rate Plainly", systemImage: "star.fill")
+                        Label("Rate HiddenLine", systemImage: "star.fill")
                     }
                     
                     Button {
@@ -80,7 +80,7 @@ struct SettingsView: View {
                     }
                 } footer: {
                     VStack(alignment: .center, spacing: 8) {
-                        Text("Plainly")
+                        Text("HiddenLine")
                             .font(.headline)
                         Text(appVersion)
                             .font(.caption)
@@ -114,7 +114,7 @@ struct SettingsView: View {
     }
     
     private func shareApp() {
-        let text = "Check out Plainly—the easiest way to get instant clarity from any app!"
+        let text = "Check out HiddenLine—the easiest way to get instant clarity from any app!"
         let url = URL(string: "https://plainly.app")!
         let activityVC = UIActivityViewController(activityItems: [text, url], applicationActivities: nil)
         

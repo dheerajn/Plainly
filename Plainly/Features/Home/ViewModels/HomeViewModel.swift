@@ -67,7 +67,7 @@ class HomeViewModel: ObservableObject {
     private func showPermissionError() {
         DispatchQueue.main.async {
             self.permissionAlertTitle = "Photo Library Access Required"
-            self.permissionAlertMessage = "Plainly needs permission to access your library to explain images and videos. Please enable access in System Settings."
+            self.permissionAlertMessage = "HiddenLine needs access to your photos to explain images and videos you select. Please enable access in System Settings."
             self.showPermissionAlert = true
             self.selectedItem = nil // Reset selection
         }

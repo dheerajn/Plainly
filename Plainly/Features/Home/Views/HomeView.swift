@@ -39,7 +39,7 @@ struct HomeView: View {
                                 .padding(.bottom, AppLayout.smallSpacing)
                         }
                         
-                        Text("Plainly")
+                        Text("HiddenLine")
                             .font(.system(size: 40, weight: .bold, design: .rounded))
                             .tracking(1)
 

@@ -1,8 +1,8 @@
-# Plainly
+# HiddenLine
 
 **Instant clarity from any app, private by design.**
 
-Plainly is an iOS app that provides critical analysis and explanations of text, links, images, videos, documents, and code shared from any app. It uses AI to expose blind spots, weak assumptions, and hidden risks in content you encounter.
+HiddenLine is an iOS app that provides critical analysis and explanations of text, links, images, videos, documents, and code shared from any app. It uses AI to expose blind spots, weak assumptions, and hidden risks in content you encounter.
 
 [![iOS](https://img.shields.io/badge/iOS-26.2+-blue.svg)](https://developer.apple.com/ios/)
 [![Swift](https://img.shields.io/badge/Swift-5.0-orange.svg)](https://swift.org)
@@ -32,7 +32,7 @@ Plainly is an iOS app that provides critical analysis and explanations of text, 
 ### 🎨 Modern iOS Design
 - **SwiftUI**: Native iOS experience with smooth animations
 - **Adaptive UI**: Supports both light and dark mode
-- **Share Extension**: Access Plainly from any app's share sheet
+- **Share Extension**: Access HiddenLine from any app's share sheet
 - **History Management**: Track all your past analyses
 
 ## Architecture
@@ -134,7 +134,7 @@ PlainlyShare/                    # Share Extension
 
 ### Main App
 
-1. **Launch Plainly** from your home screen
+1. **Launch HiddenLine** from your home screen
 2. **Enter text** or tap the image/link buttons
 3. **Choose processing mode**:
    - 🔒 On-Device: Private, local processing
@@ -145,7 +145,7 @@ PlainlyShare/                    # Share Extension
 
 1. **Open any app** (Safari, Photos, Files, etc.)
 2. **Tap the Share button**
-3. **Select "Plainly"** from the share sheet
+3. **Select "HiddenLine"** from the share sheet
 4. **Get instant analysis** of the shared content
 
 ### Supported Content Types
@@ -175,7 +175,7 @@ All prompts are in [`Plainly/Core/Models/Prompts.swift`](Plainly/Core/Models/Pro
 
 ## Privacy
 
-Plainly takes privacy seriously:
+HiddenLine takes privacy seriously:
 
 - ✅ **On-device processing preferred**: Uses Apple Intelligence when available
 - ✅ **Secure cloud fallback**: Firebase AI with encryption in transit
