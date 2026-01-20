@@ -12,7 +12,7 @@ class AppDelegate: NSObject, UIApplicationDelegate {
 }
 
 @main
-struct PlainlyApp: App {
+struct HiddenLineApp: App {
     @UIApplicationDelegateAdaptor(AppDelegate.self) var delegate
     
     var body: some Scene {

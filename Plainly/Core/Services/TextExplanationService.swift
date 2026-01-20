@@ -76,7 +76,7 @@ actor TextExplanationService {
         
         # Plain English
         - The text says: "\(text.prefix(50))..."
-        - It means that we are testing the **Plainly** app interface.
+        - It means that we are testing the **HiddenLine** app interface.
         - This is a *mock* response generated because the on-device model was unavailable.
         
         # What This Means for You

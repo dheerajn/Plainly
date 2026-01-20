@@ -1,13 +1,13 @@
 //
-//  PlainlyUITestsLaunchTests.swift
-//  PlainlyUITests
+//  HiddenLineUITestsLaunchTests.swift
+//  HiddenLineUITests
 //
 //  Created by Dheeraj Neelam on 1/5/26.
 //
 
 import XCTest
 
-final class PlainlyUITestsLaunchTests: XCTestCase {
+final class HiddenLineUITestsLaunchTests: XCTestCase {
 
     override class var runsForEachTargetApplicationUIConfiguration: Bool {
         true

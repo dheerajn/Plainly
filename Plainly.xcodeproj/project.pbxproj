@@ -561,9 +561,9 @@
 				DEVELOPMENT_TEAM = J43L6556CC;
 				ENABLE_PREVIEWS = YES;
 				GENERATE_INFOPLIST_FILE = YES;
-				INFOPLIST_KEY_CFBundleDisplayName = SecondLook;
-				INFOPLIST_KEY_NSPhotoLibraryAddUsageDescription = "Plainly needs permission to save generated content to your library.";
-				INFOPLIST_KEY_NSPhotoLibraryUsageDescription = "Plainly needs access to your photos to explain images and videos you select.";
+				INFOPLIST_KEY_CFBundleDisplayName = HiddenLine;
+				INFOPLIST_KEY_NSPhotoLibraryAddUsageDescription = "HiddenLine needs permission to save generated content to your library.";
+				INFOPLIST_KEY_NSPhotoLibraryUsageDescription = "HiddenLine needs access to your photos to explain images and videos you select.";
 				INFOPLIST_KEY_UIApplicationSceneManifest_Generation = YES;
 				INFOPLIST_KEY_UIApplicationSupportsIndirectInputEvents = YES;
 				INFOPLIST_KEY_UILaunchScreen_Generation = YES;
@@ -601,9 +601,9 @@
 				DEVELOPMENT_TEAM = J43L6556CC;
 				ENABLE_PREVIEWS = YES;
 				GENERATE_INFOPLIST_FILE = YES;
-				INFOPLIST_KEY_CFBundleDisplayName = SecondLook;
-				INFOPLIST_KEY_NSPhotoLibraryAddUsageDescription = "Plainly needs permission to save generated content to your library.";
-				INFOPLIST_KEY_NSPhotoLibraryUsageDescription = "Plainly needs access to your photos to explain images and videos you select.";
+				INFOPLIST_KEY_CFBundleDisplayName = HiddenLine;
+				INFOPLIST_KEY_NSPhotoLibraryAddUsageDescription = "HiddenLine needs permission to save generated content to your library.";
+				INFOPLIST_KEY_NSPhotoLibraryUsageDescription = "HiddenLine needs access to your photos to explain images and videos you select.";
 				INFOPLIST_KEY_UIApplicationSceneManifest_Generation = YES;
 				INFOPLIST_KEY_UIApplicationSupportsIndirectInputEvents = YES;
 				INFOPLIST_KEY_UILaunchScreen_Generation = YES;
@@ -737,7 +737,7 @@
 				DEVELOPMENT_TEAM = J43L6556CC;
 				GENERATE_INFOPLIST_FILE = YES;
 				INFOPLIST_FILE = PlainlyShare/Info.plist;
-				INFOPLIST_KEY_CFBundleDisplayName = SecondLookShare;
+				INFOPLIST_KEY_CFBundleDisplayName = HiddenLineShare;
 				INFOPLIST_KEY_NSHumanReadableCopyright = "";
 				IPHONEOS_DEPLOYMENT_TARGET = 26.0;
 				LD_RUNPATH_SEARCH_PATHS = (
@@ -771,7 +771,7 @@
 				DEVELOPMENT_TEAM = J43L6556CC;
 				GENERATE_INFOPLIST_FILE = YES;
 				INFOPLIST_FILE = PlainlyShare/Info.plist;
-				INFOPLIST_KEY_CFBundleDisplayName = SecondLookShare;
+				INFOPLIST_KEY_CFBundleDisplayName = HiddenLineShare;
 				INFOPLIST_KEY_NSHumanReadableCopyright = "";
 				IPHONEOS_DEPLOYMENT_TARGET = 26.0;
 				LD_RUNPATH_SEARCH_PATHS = (
